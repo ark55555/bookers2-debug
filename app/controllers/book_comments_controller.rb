@@ -4,6 +4,7 @@ class BookCommentsController < ApplicationController
   def create
     @book = Book.find(params[:book_id])
     @book_new = Book.new
+    @user = @book.user
     @book_comment = BookComment.new(book_comment_params)
     @book_comment.user_id = current_user.id
     @book_comment.book_id = @book.id
