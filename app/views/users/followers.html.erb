@@ -1,20 +1,6 @@
-<div class='container'>
-  <div coass='row'>
-    <h1>Follower Users</h1>
-    <table class='table'>
-      <% @users.each do |user| %>
-      <tr>
-        <td>image</td>
-        <td>name</td>
-      </tr>
-      <tr>
-        <td><%= attachment_image_tag passive_relationship.user, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg", size: "50x50" %></td>
-        <td><%= passive_relationship.user.name %></td>
-        <td><p>フォロー数:<%= user.following.count %></p></td>
-        <td><p>フォロワー数:<%= user.followers.count %></p></td>
-        <td><%= link_to 'Show', user_path(user), class: "user_#{user.id}" %></td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
+<h2>Follower Users</h2>
+<% if @users.empty? %>
+    <span>ユーザーはいません</span>
+<% else %>
+    <%= render 'index', users: @user.followers %>
+<% end %>

@@ -1,2 +1,8 @@
+<h2>Follow Users</h2>
+<% if @users.empty? %>
+    <span>ユーザーはいません</span>
+<% else%>
+    <%= render 'index', users: @user.following %>
+<% end %>
 
-<%= render 'index', users: @user.following %>
+
