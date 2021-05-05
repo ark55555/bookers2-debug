@@ -1,0 +1,9 @@
+<% if user_signed_in? %>
+<div>
+  <%= form_with search_path, local: true, method: :get do |f| %>
+    <%= f.text_field :keyword %>
+    <%= f.select :range, options_for_select([['User'],['Book']]) %>
+    <%= f.select :search, options_for_select(["完全一致","perfect_match"],["後方検索","backword_match"],["部分一致","partial_match"])%>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
