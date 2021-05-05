@@ -24,6 +24,21 @@ class User < ApplicationRecord
     active_relationships.find_by(followed_id: other_user).destroy
   end
 
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @user = User.where(name: "#{word}")
+    elsif search == "forward_match"
+      @user = User.where("name LIKE?", "#{word}%")
+    elsif search == "backward_match"
+      @user = User.where("name LIKE?", "%#{word}")
+    elsif search == "partical_match"
+      @user = User.where("name LIKE?", "%#{word}%")
+    else
+      @user = User.all
+    end
+  end
+
+
   attachment :profile_image, destroy: false
 
   validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true
