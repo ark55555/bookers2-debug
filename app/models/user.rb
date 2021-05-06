@@ -12,6 +12,11 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
 
+  attachment :profile_image, destroy: false
+
+  validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true
+  validates :introduction, length: { maximum: 50 }
+
   def following?(other_user)
     active_relationships.find_by(followed_id:other_user.id)
   end
@@ -24,23 +29,15 @@ class User < ApplicationRecord
     active_relationships.find_by(followed_id: other_user).destroy
   end
 
-  def self.looks(search, word)
+  def self.search_for(search, word)
     if search == "perfect_match"
-      @user = User.where(name: "#{word}")
+      @user = User.where(name: word)
     elsif search == "forward_match"
-      @user = User.where("name LIKE?", "#{word}%")
+      @user = User.where("name LIKE ?", word + "%")
     elsif search == "backward_match"
-      @user = User.where("name LIKE?", "%#{word}")
-    elsif search == "partical_match"
-      @user = User.where("name LIKE?", "%#{word}%")
+      @user = User.where("name LIKE ?", "%" + word)
     else
-      @user = User.all
+      @user = User.where("name LIKE?", "%" + word + "%")
     end
   end
-
-
-  attachment :profile_image, destroy: false
-
-  validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true
-  validates :introduction, length: { maximum: 50 }
 end
