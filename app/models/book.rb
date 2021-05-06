@@ -10,7 +10,6 @@ class Book < ApplicationRecord
 	def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
-  
 
 	def self.search_for(search, word)
     if search == "perfect_match"
@@ -23,5 +22,5 @@ class Book < ApplicationRecord
       @book = Book.where("title LIKE?", "%" + word + "%")
     end
   end
-  
+
 end
