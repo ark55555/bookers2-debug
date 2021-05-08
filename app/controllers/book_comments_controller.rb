@@ -9,7 +9,7 @@ class BookCommentsController < ApplicationController
     @book_comment.user_id = current_user.id
     @book_comment.book_id = @book.id
     @book_comment.save
-    render "books/comment"
+  
   end
 
   def destroy

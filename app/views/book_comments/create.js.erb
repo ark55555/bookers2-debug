@@ -1,2 +1,2 @@
-$("#acomments-area").html("<%= j(render 'books/comment', book: @book ) %>");
-
+$("#comments-area").html("<%= j(render 'books/comment', book: @book, book_comment: @book_comment ) %>");
+$("#comment-form").val("");
