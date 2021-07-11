@@ -1,10 +1,10 @@
 class BooksController < ApplicationController
-  
+
 
   def index
     @user = current_user
     @book = Book.new
-    @books = Book.all
+    @books = Book.week_ranks
   end
 
   def create
