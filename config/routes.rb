@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   end
   get 'search' => 'searches#search'
   
+  resources :chats, only: [:show, :create]
 end
