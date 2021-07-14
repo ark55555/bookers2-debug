@@ -1,8 +1,9 @@
-<h3 id="room" data-room="<%= @room.id %>" data-user="<%= current_user.id %>"><%= @user.name %>さんとのチャット</h3>
+<h3 id="room"><%= @user.name %>さんとのチャット</h3>
 
 <div class="message" style="width: 400px;">
   <% @chats.each do |chat| %>
-    <% if chat.user_id == current_user %>
+
+    <% if chat.user_id == current_user.id %>
       <p style="text-align: right;"><%= chat.user.name %>:<%= chat.message %></p>
     <% else %>
       <p style="text-align: left;"><%= chat.user.name %>:<%= chat.message %></p>
