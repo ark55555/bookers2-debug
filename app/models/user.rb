@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :user_rooms
   has_many :rooms, through: :user_rooms
   has_many :view_counts, dependent: :destroy
+  has_many :group_users
+  has_many :groups, through: :group_users
 
   include JpPrefecture
   jp_prefecture :prefecture_code
