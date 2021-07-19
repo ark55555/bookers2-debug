@@ -4,7 +4,7 @@ class BooksController < ApplicationController
 
   def index
     @book = Book.new
-    @books = Book.week_ranks
+    @books = Book.all.order(params[:sort])
   end
 
   def create
@@ -47,7 +47,7 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:title, :body, :rate)
   end
-  
+
   def ensure_correct_user
     @book = Book.find(params[:id])
     unless @book.user_id == current_user.id
