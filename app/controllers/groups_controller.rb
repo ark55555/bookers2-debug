@@ -48,6 +48,18 @@ class GroupsController < ApplicationController
     @group.users.delete(current_user)
     redirect_to groups_path
   end
+  
+  def new_mail
+    @group =Group.find(params[:group_id])
+  end
+  
+  def send_mail
+    @group =Group.find(params[:group_id])
+    group_users = @group.users
+    @title = params[:title]
+    @content = params[:content]
+    EventMailer.send_mail(group_users, @title, @content).deliver
+  end
 
   private
 
