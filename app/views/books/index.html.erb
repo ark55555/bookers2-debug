@@ -1,16 +1,5 @@
 <div class='container px-5 px-sm-0'>
-  <% if @book.errors.any? %>
-      <div id="error_explanation">
-        <h3><%= @book.errors.count %>error prohibited this obj from being saved:</h3>
-        <ul>
-          <li>
-            <% @book.errors.full_messages.each do |message| %>
-            <%= message %>
-          </li>
-        </ul>
-      </diV>
-            <% end %>
-    <% end %>
+  <%= render 'layouts/errors', obj: @book %>
   <div class='row'>
     <div class='col-md-3'>
       <h2>User info</h2>
@@ -22,7 +11,7 @@
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
       <%= link_to '新着順', books_path(sort: 'created_at DESC') %> | <%= link_to '評価順', books_path(sort: 'rate DESC') %>
-      <%= render 'index', books: @books%>
+      <%= render 'index', books: @books %>
     </div>
   </div>
 </div>

@@ -26,6 +26,10 @@ class Book < ApplicationRecord
     end
   end
   
+  def self.search(search_word)
+    Book.where(['category LIKE ?', "%#{search_word}%"])
+  end
+  
   # 週間いいねランキング(現在90日で設定)
   def self.week_ranks
     from = Time.current.at_beginning_of_day - 90.day 
