@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get :following, :followers
     end
     resource :relationships, only: [:create, :destroy]
+    get "search" => "users#search"
   end
 
   resources :books do
